@@ -3,7 +3,6 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.conf.urls.static import static
 import os
-import tensorflow as tf
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -28,12 +27,12 @@ def preprocessing(request):
         df = pd.read_csv(uploaded_file)
         dataFrame = df.to_json()
         request.session['df'] = dataFrame
-        
+
         rows = len(df.index)
         request.session['rows'] = rows
         header = df.axes[1].values.tolist()
         request.session['header'] = header
-        
+
         attributes = len(header)
         types = []
         maxs = []
@@ -45,7 +44,7 @@ def preprocessing(request):
             if df[header[i]].dtypes != 'object':
                 maxs.append(df[header[i]].max())
                 mins.append(df[header[i]].min())
-                means.append(round(df[header[i]].mean(),2))
+                means.append(round(df[header[i]].mean(), 2))
             else:
                 maxs.append(0)
                 mins.append(0)
@@ -54,29 +53,30 @@ def preprocessing(request):
         zipped_data = zip(header, types, maxs, mins, means)
         print(maxs)
         datas = df.values.tolist()
-        data ={  
-                "header": header,
-                "headers": json.dumps(header),
-                "name": name,
-                "attributes": attributes,
-                "rows": rows,
-                "zipped_data": zipped_data,
-                'df': datas,
-                "type": types,
-                "maxs": maxs,
-                "mins": mins,
-                "means": means,
-            }
+        data = {
+            "header": header,
+            "headers": json.dumps(header),
+            "name": name,
+            "attributes": attributes,
+            "rows": rows,
+            "zipped_data": zipped_data,
+            'df': datas,
+            "type": types,
+            "maxs": maxs,
+            "mins": mins,
+            "means": means,
+        }
     else:
         name = 'None'
         attributes = 'None'
         rows = 'None'
-        data ={
-                "name": name,
-                "attributes": attributes,
-                "rows": rows,
-            }
-    return render(request, 'index.html', data) 
+        data = {
+            "name": name,
+            "attributes": attributes,
+            "rows": rows,
+        }
+    return render(request, 'index.html', data)
+
 
 def checker_page(request):
     if request.POST:
@@ -90,10 +90,11 @@ def checker_page(request):
             return redirect('classification')
         elif method == '2':
             return redirect('clustering')
-        else: 
+        else:
             return redirect('preprocessing')
     else:
         return render(request, 'index.html')
+
 
 def chooseMethod(request):
     if request.method == 'POST':
@@ -101,6 +102,7 @@ def chooseMethod(request):
         print('method di session : ', method)
         request.session['method'] = method
     return redirect('classification')
+
 
 def classification(request):
     rows = request.session['rows']
@@ -113,7 +115,7 @@ def classification(request):
     if request.session:
         features = request.session['drop']
         print('features : ', features)
-        method, k, graph, reportNB, reportKNN, options, crossValue, splitValue, crossValues, splitValues, outputs =  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        method, k, graph, reportNB, reportKNN, options, crossValue, splitValue, crossValues, splitValues, outputs = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
         if request.session:
             method = request.session['method']
@@ -128,11 +130,13 @@ def classification(request):
                     if options == '1':
                         splitValue = request.POST['splitValue']
                         print('split value : ', splitValue)
-                        reportKNN, graph = knn(df, features, options, splitValue, 0, k)
+                        reportKNN, graph = knn(
+                            df, features, options, splitValue, 0, k)
                     elif options == '2':
                         crossValue = request.POST['crossValue']
                         print('cross value : ', crossValue)
-                        reportKNN, graph = knn(df, features, options, 0, crossValue,  k)
+                        reportKNN, graph = knn(
+                            df, features, options, 0, crossValue,  k)
             elif method == '2':
                 nameMethod = 'Naive Bayes'
                 outputs = request.POST.get('output')
@@ -142,11 +146,13 @@ def classification(request):
                     if options == '1':
                         splitValue = request.POST['splitValue']
                         print('split value : ', splitValue)
-                        reportNB, graph = naiveBayes(df, features, options, splitValue, 0, outputs)
+                        reportNB, graph = naiveBayes(
+                            df, features, options, splitValue, 0, outputs)
                     elif options == '2':
                         crossValue = request.POST['crossValue']
                         print('cross value : ', crossValue)
-                        reportNB, graph = naiveBayes(df, features, options, 0, crossValue, outputs)
+                        reportNB, graph = naiveBayes(
+                            df, features, options, 0, crossValue, outputs)
             if crossValue:
                 request.session['cross'] = crossValue
                 crossValues = request.session['cross']
@@ -157,8 +163,8 @@ def classification(request):
         data = {
             "headers": headers,
             "method": method,
-            "naiveBayes": round((reportNB*100),2),
-            "knn": round((reportKNN*100),2),
+            "naiveBayes": round((reportNB*100), 2),
+            "knn": round((reportKNN*100), 2),
             "k": k,
             "name": name,
             "rows": rows,
@@ -173,6 +179,7 @@ def classification(request):
     else:
         return redirect('preprocessing')
     return render(request, 'classification.html', data)
+
 
 def clustering(request):
     rows = request.session['rows']
@@ -194,7 +201,7 @@ def clustering(request):
         x_scaled = scaler.fit_transform(x_array)
 
         # Menentukan dan mengkonfigurasi fungsi kmeans
-        kmeans = KMeans(n_clusters = nilai_k)
+        kmeans = KMeans(n_clusters=nilai_k)
         # Menentukan kluster dari data
         kmeans.fit(x_scaled)
 
@@ -207,13 +214,14 @@ def clustering(request):
         for i in sorted(clusters):
             sort_cluster.append(clusters[i])
             label.append(i)
-        
+
         fig, ax = plt.subplots()
-        sct = ax.scatter(x_scaled[:,1], x_scaled[:,0], s = 200, c = df.cluster)
-        legend1 = ax.legend(*sct.legend_elements(),loc="lower left", title="Clusters")
+        sct = ax.scatter(x_scaled[:, 1], x_scaled[:, 0], s=200, c=df.cluster)
+        legend1 = ax.legend(*sct.legend_elements(),
+                            loc="lower left", title="Clusters")
         ax.add_artist(legend1)
         centers = kmeans.cluster_centers_
-        ax.scatter(centers[:,1], centers[:,0], c='red', s=200)
+        ax.scatter(centers[:, 1], centers[:, 0], c='red', s=200)
         plt.title("Clustering K-Means Results")
         plt.xlabel(nilai_x)
         plt.ylabel(nilai_y)
@@ -233,7 +241,8 @@ def clustering(request):
             "name": '',
         }
 
-    return render(request, 'clustering.html', data) 
+    return render(request, 'clustering.html', data)
+
 
 def get_graph():
     buffer = BytesIO()
@@ -244,6 +253,7 @@ def get_graph():
     graph = graph.decode('utf-8')
     buffer.close()
     return graph
+
 
 def naiveBayes(df, features, options, size, fold, outputs):
     # Variabel independen
@@ -265,17 +275,19 @@ def naiveBayes(df, features, options, size, fold, outputs):
 
     if train == '1':
         from sklearn.model_selection import train_test_split
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = split)
+        x_train, x_test, y_train, y_test = train_test_split(
+            x, y, test_size=split)
         # Memasukkan data training pada fungsi klasifikasi Naive Bayes
         nbtrain = modelnb.fit(x_train, y_train)
         # Menentukan hasil prediksi dari x_test
         y_pred = nbtrain.predict(x_test)
         ytest = np.array(y_test)
         y_test = ytest.flatten()
-        report = metrics.accuracy_score(y_test, y_pred) #score prediksi
+        report = metrics.accuracy_score(y_test, y_pred)  # score prediksi
 
         f, ax = plt.subplots()
-        sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt=".0f", ax=ax)
+        sns.heatmap(confusion_matrix(y_test, y_pred),
+                    annot=True, fmt=".0f", ax=ax)
         plt.xlabel("Predicted Label")
         plt.ylabel("True Label")
         graph = get_graph()
@@ -288,8 +300,8 @@ def naiveBayes(df, features, options, size, fold, outputs):
         # k - fold cross validation
         from sklearn.model_selection import cross_val_predict
         y_pred = cross_val_predict(modelnb, x, y, cv=cross)
-        report = metrics.accuracy_score(y, y_pred)  #score prediksi
-        
+        report = metrics.accuracy_score(y, y_pred)  # score prediksi
+
         f, ax = plt.subplots()
         sns.heatmap(confusion_matrix(y, y_pred), annot=True, fmt=".0f", ax=ax)
         plt.xlabel("Predicted Label")
@@ -300,11 +312,12 @@ def naiveBayes(df, features, options, size, fold, outputs):
         print(report)
         return report, graph
 
+
 def knn(df, features, options, size, fold, kValue):
     fitur = features
     x = df[fitur]
 
-    y = df.iloc[:,-1:]
+    y = df.iloc[:, -1:]
 
     # mengubah nilai fitur menjadi rentang 0 - 1
     from sklearn.preprocessing import MinMaxScaler
@@ -323,14 +336,16 @@ def knn(df, features, options, size, fold, kValue):
 
     if train == '1':
         from sklearn.model_selection import train_test_split
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = split)
+        x_train, x_test, y_train, y_test = train_test_split(
+            x, y, test_size=split)
 
         knn.fit(x_train, y_train)
         y_pred = knn.predict(x_test)
-        report = metrics.accuracy_score(y_test, y_pred) #score prediksi
+        report = metrics.accuracy_score(y_test, y_pred)  # score prediksi
 
         f, ax = plt.subplots()
-        sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt=".0f", ax=ax)
+        sns.heatmap(confusion_matrix(y_test, y_pred),
+                    annot=True, fmt=".0f", ax=ax)
         plt.xlabel("Predicted Label")
         plt.ylabel("True Label")
         graph = get_graph()
@@ -343,8 +358,8 @@ def knn(df, features, options, size, fold, kValue):
         # k - fold cross validation
         from sklearn.model_selection import cross_val_predict
         y_pred = cross_val_predict(knn, x, y, cv=cross)
-        report = metrics.accuracy_score(y, y_pred)  #score prediksi
-        
+        report = metrics.accuracy_score(y, y_pred)  # score prediksi
+
         f, ax = plt.subplots()
         sns.heatmap(confusion_matrix(y, y_pred), annot=True, fmt=".0f", ax=ax)
         plt.xlabel("Predicted Label")
