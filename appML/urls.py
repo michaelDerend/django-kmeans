@@ -10,9 +10,10 @@ urlpatterns = [
     path('preprocessing/', preprocessing, name='preprocessing'),
     path('checker_page/', checker_page, name='checker_page'),
     path('chooseMethod/', chooseMethod, name='chooseMethod'),
-    path('classification/', classification, name='classification'),
+    # path('classification/', classification, name='classification'),
     path('clustering/', clustering, name='clustering'),
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
