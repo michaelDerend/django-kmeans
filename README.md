@@ -2,7 +2,7 @@
 
 Web application to cluster data only use csv file upload.
 
-[![Django CI](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml/badge.svg)](https://github.com/liangliangyy/DjangoBlog/actions/workflows/django.yml) [![CodeQL](https://github.com/liangliangyy/DjangoBlog/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/liangliangyy/DjangoBlog/actions/workflows/codeql-analysis.yml) [![codecov](https://codecov.io/gh/liangliangyy/DjangoBlog/branch/master/graph/badge.svg)](https://codecov.io/gh/liangliangyy/DjangoBlog) [![license](https://img.shields.io/github/license/liangliangyy/djangoblog.svg)]()
+[![Django CI](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml/badge.svg)](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml) [![license](https://img.shields.io/github/license/dkzhen/django-kmeans.svg)]()
 
 ## Usage
 
