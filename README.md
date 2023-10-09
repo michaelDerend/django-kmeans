@@ -26,6 +26,12 @@ Web application to cluster data only use csv file upload.
   git clone https://github.com/dkzhen/django-kmeans
 ```
 
+OR
+
+```console
+https://github.com/dkzhen/django-kmeans/archive/refs/tags/V0.1.zip
+```
+
 2. install dependencies
 
 ```python
