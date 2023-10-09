@@ -1,3 +1,4 @@
+appml==0.1
 cycler==0.10.0
 Django==2.2.12
 joblib==1.0.0
