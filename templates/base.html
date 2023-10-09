@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -35,16 +36,7 @@
                     >Preprocessing</a
                   >
                 </li>
-                {% comment %}
-                <li class="nav-item">
-                  {% url 'classification' as url %}
-                  <a
-                    class="nav-link {% if request.path == url %}active{% endif %}"
-                    href="{% url 'classification' %}"
-                    >Classification</a
-                  >
-                </li>
-                {% endcomment %}
+
                 <li class="nav-item">
                   {% url 'clustering' as url %}
                   <a
@@ -61,8 +53,10 @@
     </header>
 
     {% block content %} {% endblock %} {% block scripts %}
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+      </>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0">
+    </script>
     <script src="https://cdnjs.com/libraries/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script
