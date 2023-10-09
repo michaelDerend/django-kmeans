@@ -16,7 +16,7 @@ Web application to cluster data only use csv file upload.
 
 ### required
 
-- [Python 3.12.0 or later](https://www.python.org/downloads/)
+- [Python 3.12.0 or latest](https://www.python.org/downloads/)
 
 1. Clone repository
 
