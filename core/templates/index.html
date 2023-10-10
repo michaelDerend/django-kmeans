@@ -12,7 +12,8 @@
               name="document"
               id="nameFile"
             />
-            <button class="btn btn-dark" type="submit" id="file">Apply</button>
+            
+            <button class="btn btn-dark ms-2" type="submit" id="file">Apply</button>
           </div>
         </form>
       </div>
@@ -25,16 +26,7 @@
           <p>Attributes : {{ attributes }}</p>
           <p>Row Data : {{ rows }}</p>
         </div>
-      </div>
-      <div class="attributes col-md-6">
-        <p style="color: white">Statistic Attributes</p>
-        <div style="border: solid white" class="box__attributes">
-          <div class=""></div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="detail col-md-6">
+      </br>
         <p>Attributes</p>
         <!-- Large modal -->
         <!-- Button trigger modal -->
@@ -111,8 +103,10 @@
         >
           Delete Selected Atrributes
         </button>
+      
         <form method="POST" action="{% url 'checker_page' %}">
           <!-- start form page -->
+        </br>
           <div class="box__detail">
             <div class="scroll">
               <table
@@ -171,12 +165,13 @@
             Select
           </button>
         </form>
-        <!-- end from page -->
       </div>
+      
       <div class="chart col-md-6">
         <canvas id="myChart" width="100px" height="53px"></canvas>
       </div>
     </div>
+    
   </div>
 </main>
 {% endblock %}
