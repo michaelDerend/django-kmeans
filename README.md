@@ -71,3 +71,7 @@ $ bundle dependencies versions
 | django-active-link        | 0.1.8   |
 +---------------------------+---------+
 ```
+
+## Team
+* Dani 
+* Putra
