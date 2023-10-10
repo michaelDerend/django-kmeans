@@ -1,0 +1,32 @@
+name: Update README with Latest Release
+
+on:
+  push:
+    branches:
+      - main  # Modify this branch if needed
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Get latest release
+        id: get-latest-release
+        run: |
+          latest_release=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name')
+          echo "Latest release is $latest_release"
+          echo "::set-output name=latest_release::$latest_release"
+
+      - name: Update README
+        run: |
+          latest_release="${{ steps.get-latest-release.outputs.latest_release }}"
+          sed -i "s|https://github.com/dkzhen/django-kmeans/archive/refs/tags/V0.1.zip|https://github.com/dkzhen/django-kmeans/archive/refs/tags/${latest_release}.zip|" README.md
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update README with latest release"
+          git push
+
