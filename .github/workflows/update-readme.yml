@@ -23,8 +23,8 @@ jobs:
       - name: Update README
         run: |
           latest_release="${{ steps.get-latest-release.outputs.latest_release }}"
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          git config user.name "dkzhen"
+          git config user.email "dani314123@gmail.com"
           git remote add origin_with_token "https://$GH_PAT@github.com/${{ github.repository }}.git"
           git fetch origin_with_token
           git checkout -b update-readme
