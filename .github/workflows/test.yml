@@ -1,4 +1,4 @@
-name: Update README with Latest Release and Test Write
+name: Update README with Latest Release
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  update-readme-and-test:
+  update-readme:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,6 +32,5 @@ jobs:
           git add README.md
           git commit -m "Update README with latest release"
           git push --set-upstream origin_with_token update-readme
-          
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
