@@ -9,7 +9,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', preprocessing, name='preprocessing'),
     path('checker_page/', checker_page, name='checker_page'),
-    path('chooseMethod/', chooseMethod, name='chooseMethod'),
     path('clustering/', clustering, name='clustering'),
 ]
 

@@ -4,7 +4,7 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
 
@@ -141,36 +141,10 @@
                 label: "# of votes",
                 data: data,
                 backgroundColor: coloR,
-                borderWidth: 1,
+                borderWidth: 8,
               },
             ],
           },
-        });
-      });
-
-      $(document).ready(function () {
-        $("#save").click(function () {
-          var currentPosition = document.getElementById("resultPdf").scrollTop;
-          var w = document.getElementById("resultPdf").offsetWidth;
-          var h = document.getElementById("resultPdf").offsetHeight;
-          console.log(w);
-          console.log(h);
-          document.getElementById("resultPdf").style.height = "auto";
-          document.getElementById("resultPdf").style.background = "white";
-
-          html2canvas(document.getElementById("resultPdf"), {
-            dpi: 300, // Set to 300 DPI
-            scale: 1000, // Adjusts your resolution
-            onrendered: function (canvas) {
-              var img = canvas.toDataURL("image/jpeg", 1);
-              var doc = new jsPDF("p", "pt", "a4");
-              doc.addImage(img, "JPEG", 0, 0, w - 400, h);
-              doc.addPage();
-              doc.save("results.pdf");
-            },
-          });
-          document.getElementById("resultPdf").style.height = "365px";
-          document.getElementById("resultPdf").scrollTop = currentPosition;
         });
       });
     </script>

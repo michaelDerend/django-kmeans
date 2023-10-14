@@ -1,13 +1,19 @@
-from django.shortcuts import render, redirect
+from itertools import combinations
+import io
+from io import BytesIO
+import base64
+import plotly.graph_objects as go
+import plotly.express as px
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
 import os
-import pandas as pd
 import matplotlib.pyplot as plt
+from django.shortcuts import render, redirect
+import pandas as pd
 import numpy as np
 import json
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import MinMaxScaler
-import base64
-from io import BytesIO
+import matplotlib
+matplotlib.use('Agg')
 
 
 # Create your views here.
@@ -79,9 +85,7 @@ def checker_page(request):
             print(head)
         request.session['drop'] = drop_header
         method = request.POST.get('selected_method')
-        if method == '1':
-            return redirect('classification')
-        elif method == '2':
+        if method == '2':
             return redirect('clustering')
         else:
             return redirect('preprocessing')
@@ -89,12 +93,14 @@ def checker_page(request):
         return render(request, 'index.html')
 
 
-def chooseMethod(request):
-    if request.method == 'POST':
-        method = request.POST.get('method')
-        print('method di session : ', method)
-        request.session['method'] = method
-    return redirect('classification')
+def custom_normalization(data):
+    max_value = data.max()
+    min_value = data.min()
+    if max_value == min_value:
+        # Handle data with all the same values (e.g., all 0)
+        return data
+    normalized_data = (data - min_value) / (max_value - min_value)
+    return normalized_data
 
 
 def clustering(request):
@@ -107,19 +113,40 @@ def clustering(request):
     print(features)
     nilai_x = features[0]
     nilai_y = features[1]
-    if request.method == 'POST' and request.POST['nilai_k']:
+
+    feature_data = []
+
+
+# Loop melalui fitur yang dimasukkan
+    for feature in features:
+        feature_values = df[feature].values.tolist()
+        feature_data.append({
+            'feature_name': feature,
+            "data": feature_values
+
+        })
+
+
+# Variabel `feature_data` sekarang berisi array dari data setiap fitur
+
+    if request.method == 'POST' and 'nilai_k' in request.POST:
         k = request.POST['nilai_k']
         nilai_k = int(k)
 
         x_array = np.array(df.iloc[:, 3:5])
 
-        scaler = MinMaxScaler()
-        x_scaled = scaler.fit_transform(x_array)
+        x_normalized = custom_normalization(x_array)
+
+        scaler = StandardScaler()
+        x_scaled = scaler.fit_transform(x_normalized)
 
         # Menentukan dan mengkonfigurasi fungsi kmeans
         kmeans = KMeans(n_clusters=nilai_k)
         # Menentukan kluster dari data
         kmeans.fit(x_scaled)
+
+        # Calculate cluster centroids
+        centers = kmeans.cluster_centers_
 
         # Menambahkan kolom "kluster" dalam data frame
         df['cluster'] = kmeans.labels_
@@ -131,17 +158,70 @@ def clustering(request):
             sort_cluster.append(clusters[i])
             label.append(i)
 
-        fig, ax = plt.subplots()
-        sct = ax.scatter(x_scaled[:, 1], x_scaled[:, 0], s=200, c=df.cluster)
-        legend1 = ax.legend(*sct.legend_elements(),
-                            loc="lower left", title="Clusters")
-        ax.add_artist(legend1)
-        centers = kmeans.cluster_centers_
-        ax.scatter(centers[:, 1], centers[:, 0], c='red', s=200)
-        plt.title("Clustering K-Means Results")
-        plt.xlabel(nilai_x)
-        plt.ylabel(nilai_y)
-        graph = get_graph()
+        # Inisialisasi array objek untuk menyimpan data setiap baris
+        feature_data.append({
+            'feature_name': 'Cluster',
+            'data': df['cluster'].values.tolist()
+        })
+    # Create a scatter plot for each cluster and feature combination
+        cluster_combinations = []
+        feature_combinations = list(combinations(features, 2))
+
+        for cluster_id in range(nilai_k):
+            for feature_x, feature_y in feature_combinations:
+                plt.figure()
+                cluster_data = df[df['cluster'] == cluster_id]
+                plt.scatter(cluster_data[feature_x],
+                            cluster_data[feature_y], s=50)
+                plt.title(
+                    f'Cluster {cluster_id}, Features: {feature_x} and {feature_y}')
+                plt.xlabel(feature_x)
+                plt.ylabel(feature_y)
+
+                buffer = io.BytesIO()
+                plt.savefig(buffer, format="png")
+                plt.close()  # Close the plot to release resources
+
+                # Encode the image data to base64
+                img_data = base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+                # Append the data URI to the list of cluster plots
+                cluster_combinations.append(
+                    f"data:image/png;base64,{img_data}")
+
+        if len(features) > 2:
+            # Create a 3D scatter plot
+            fig = px.scatter_3d(
+                df, x=features[0], y=features[1], z=features[2], color=df['cluster'])
+            fig.update_layout(scene=dict(xaxis_title=nilai_x,
+                              yaxis_title=nilai_y, zaxis_title=features[2]))
+        else:
+            # Create a 2D scatter plot
+            fig = px.scatter(df, x=features[0],
+                             y=features[1], color=df['cluster'])
+
+        # Add centroids
+        fig.add_trace(go.Scatter(
+            x=centers[:, 1], y=centers[:, 0], mode='markers', marker=dict(size=8, color='red')))
+
+        # Update plot title and axis labels
+        fig.update_layout(title="Clustering K-Means Results")
+        fig.update_xaxes(title_text=nilai_x)
+        fig.update_yaxes(title_text=nilai_y)
+
+        # Convert the Plotly figure to HTML
+        graph = fig.to_html()
+        df_selected = df.loc[:, features]
+
+    # Buat DataFrame baru untuk kolom 'Cluster' dari kolom 'cluster' yang sudah ada
+        df_cluster = pd.DataFrame({'Cluster': df['cluster']})
+
+    # Gabungkan df_selected dan df_cluster
+        df_combined = pd.concat([df_selected, df_cluster], axis=1)
+        df_combined_json = df_combined.values.tolist()
+
+        # print(df_combined_json)
+    # print(feature_data)
 
         if name:
             data = {
@@ -151,6 +231,13 @@ def clustering(request):
                 "features": features,
                 "label": label,
                 "chart": graph,
+                "cluster_combinations": cluster_combinations,
+                "results": feature_data,
+                "data_json": df_combined_json
+            }
+        else:
+            data = {
+                "name": '',
             }
     else:
         data = {
@@ -158,14 +245,3 @@ def clustering(request):
         }
 
     return render(request, 'clustering.html', data)
-
-
-def get_graph():
-    buffer = BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-    image_png = buffer.getvalue()
-    graph = base64.b64encode(image_png)
-    graph = graph.decode('utf-8')
-    buffer.close()
-    return graph
