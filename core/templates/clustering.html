@@ -9,7 +9,7 @@
             </div>
             <div class="method col-md-9">
                 <div class="btn-group">
-                  <select class="form-select" id="inputMethod">
+                  <select class="form-select custom-select" id="inputMethod">
                     <option value="1">K-Means</option>
                   </select>
                 </div>
@@ -58,20 +58,25 @@
                       <canvas id="chart" width="150px" height="50px"></canvas>
                       {% if chart %}
                          {{chart|safe}}
-                        <div class="cluster-combinations">
+                         <div class="cluster-combinations">
                           {% for com in cluster_combinations %}
-                              <img src="{{ com }}" alt="Cluster Plot" width="400" height="300">
+                              {% comment %} <img src="{{ com }}" alt="Cluster Plot"  width="700" height="500"> {% endcomment %}
+                              {{com|safe}}
                           {% endfor %}
                       </div>
-                      <h1>Results Data</h1>
-                      <button
+                    </br>
+                      <div class = "text-center">
+                        <h3>Results Data</h3>
+                        <button
           type="button"
-          class="badge bg-dark view"
+          class="btn-dark"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
-        >
+        > 
           View Data
         </button>
+                      </div>
+                    </br>
                 <!-- Modal -->
                 <div
                 class="modal fade"

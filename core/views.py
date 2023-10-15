@@ -1,13 +1,8 @@
 from itertools import combinations
-import io
-from io import BytesIO
-import base64
 import plotly.graph_objects as go
 import plotly.express as px
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
-import os
-import matplotlib.pyplot as plt
 from django.shortcuts import render, redirect
 import pandas as pd
 import numpy as np
@@ -108,9 +103,9 @@ def clustering(request):
     name = request.session['name']
     df = request.session['df']
     df = pd.read_json(df)
-    print(df)
+    # print(df)
     features = request.session['drop']
-    print(features)
+    # print(features)
     nilai_x = features[0]
     nilai_y = features[1]
 
@@ -169,25 +164,17 @@ def clustering(request):
 
         for cluster_id in range(nilai_k):
             for feature_x, feature_y in feature_combinations:
-                plt.figure()
+
                 cluster_data = df[df['cluster'] == cluster_id]
-                plt.scatter(cluster_data[feature_x],
-                            cluster_data[feature_y], s=50)
-                plt.title(
-                    f'Cluster {cluster_id}, Features: {feature_x} and {feature_y}')
-                plt.xlabel(feature_x)
-                plt.ylabel(feature_y)
+                fig = px.scatter(cluster_data, x=feature_x, y=feature_y,
+                                 title=f'Cluster {cluster_id}, Attributes: {feature_x} and {feature_y}')
+                fig.update_xaxes(tickangle=45, tickfont=dict(
+                    family='Arial', size=12))
+                fig.update_yaxes(tickfont=dict(family='Arial', size=12))
 
-                buffer = io.BytesIO()
-                plt.savefig(buffer, format="png")
-                plt.close()  # Close the plot to release resources
+                img_graph = fig.to_html()
 
-                # Encode the image data to base64
-                img_data = base64.b64encode(buffer.getvalue()).decode("utf-8")
-
-                # Append the data URI to the list of cluster plots
-                cluster_combinations.append(
-                    f"data:image/png;base64,{img_data}")
+                cluster_combinations.append(img_graph)
 
         if len(features) > 2:
             # Create a 3D scatter plot
@@ -201,8 +188,8 @@ def clustering(request):
                              y=features[1], color=df['cluster'])
 
         # Add centroids
-        fig.add_trace(go.Scatter(
-            x=centers[:, 1], y=centers[:, 0], mode='markers', marker=dict(size=8, color='red')))
+            fig.add_trace(go.Scatter(
+                x=centers[:, 1], y=centers[:, 0], mode='markers', marker=dict(size=8, color='red')))
 
         # Update plot title and axis labels
         fig.update_layout(title="Clustering K-Means Results")
@@ -218,10 +205,12 @@ def clustering(request):
 
     # Gabungkan df_selected dan df_cluster
         df_combined = pd.concat([df_selected, df_cluster], axis=1)
-        df_combined_json = df_combined.values.tolist()
+        # Urutkan DataFrame berdasarkan kolom 'Cluster'
+        df_combined_sorted = df_combined.sort_values(by='Cluster')
+        df_combined_json = df_combined_sorted.values.tolist()
 
-        # print(df_combined_json)
-    # print(feature_data)
+        # print(df_combined_sorted)
+        # print(feature_data)
 
         if name:
             data = {
