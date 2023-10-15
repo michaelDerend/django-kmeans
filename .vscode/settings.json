@@ -2,6 +2,13 @@
     "python.pythonPath": "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python38\\python.exe",
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
-      }
+      },
+      "[django-html]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "ms-python.autopep8"
+        
+    },
+   
+    
    
 }

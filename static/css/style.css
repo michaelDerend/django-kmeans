@@ -27,21 +27,6 @@ body {
   font-size: smaller;
   margin-bottom: -10px;
 }
-.info > p {
-  font-weight: 700;
-}
-.box__info {
-  border: solid black;
-  border-radius: 10px;
-  width: 550px;
-  height: 120px;
-  margin-top: -10px;
-}
-.box__info p {
-  display: inline-block;
-  padding-right: 65px;
-  margin: 12px;
-}
 
 .attributes > p {
   font-weight: 700;

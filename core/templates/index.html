@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block content %}
 <main>
   <div class="container">
     <div class="row">
@@ -12,53 +14,61 @@
               name="document"
               id="nameFile"
             />
-            
             <button class="btn btn-dark ms-2" type="submit" id="file">Apply</button>
           </div>
         </form>
       </div>
     </div>
+
     <div class="row">
-      <div class="info col-md-6">
-        <p>Information</p>
-        <div class="box__info">
-          <p>File Name : {{ name }}</p>
-          <p>Attributes : {{ attributes }}</p>
-          <p>Row Data : {{ rows }}</p>
+      <div class="col-md-6 mb-4">
+        <div class="border rounded mt-4 p-3" style="overflow: hidden; border-width: 2px;">
+          <p class="fw-bold">Information</p>
+          <p class="d-inline-block me-4 mb-2 mb-md-0">File Name : {{ name }}</p>
+          <p class="d-inline-block me-4 d-block mb-2 mb-md-0">Attributes : {{ attributes }}</p>
+          <p class="d-inline-block mb-2 mb-md-0">Row Data : {{ rows }}</p>
         </div>
-      </br>
-        <p>Attributes</p>
+      </div>
+      <div class="col-md-6 chart">
+        <canvas id="myChart" width="100px" height="53px"></canvas>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <p class="fw-bold ms-4 d-md-block d-lg-block " style="display:none">Attributes</p>
+          <div class="d-md-block d-lg-block" style="display:none">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">View Data</button>
+            
+              <button id="deleterows" type="submit"
+              onclick="this.form.submit()" class="me-4 btn btn-danger">Delete Selected Attributes</button>
+            
+          </div>
+          <div class="d-md-none d-lg-none">
+            <p class="ms-4 fw-bold">Attributes</p>
+            <div class="align-items-center d-flex ms-4">
+              <div class="col">
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">View Data</button>
+              </div>
+              <div class="col">
+                  <button id="deleterows" type="submit"
+                  onclick="this.form.submit()" class="btn btn-danger btn-sm">Delete Attributes</button>
+                </div>
+            </div>
+          </div>
+  
+        </div>
         <!-- Large modal -->
-        <!-- Button trigger modal -->
-        <button
-          type="button"
-          class="badge bg-dark view"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
-          View Data
-        </button>
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">View Data</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <div class="scrollAblee">
+                <div class="scrollAblee" style="overflow: auto; max-height: 400px;">
                   <table class="table table-striped table-bordered">
                     <thead>
                       <tr>
@@ -66,112 +76,85 @@
                         <th scope="col">No.</th>
                         {% for head in header %}
                         <th scope="col">{{ head }}</th>
-                        {% endfor %} {% endif %}
+                        {% endfor %}
+                        {% endif %}
                       </tr>
                     </thead>
                     <tbody>
-                      {% if df %} {% for datas in df %}
+                      {% if df %}
+                      {% for datas in df %}
                       <tr>
                         <td>{{ forloop.counter }}</td>
                         {% for data in datas %}
                         <td>{{ data }}</td>
                         {% endfor %}
                       </tr>
-                      {% endfor %} {% endif %}
+                      {% endfor %}
+                      {% endif %}
                     </tbody>
                   </table>
                 </div>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
         </div>
-        <!-- end modal -->
-        <button
-          id="deleterows"
-          class="badge bg-dark delete"
-          type="submit"
-          onclick="this.form.submit()"
-        >
-          Delete Selected Atrributes
-        </button>
-      
-        <form method="POST" action="{% url 'checker_page' %}">
-          <!-- start form page -->
-        </br>
-          <div class="box__detail">
-            <div class="scroll">
-              <table
-                class="table table-striped selectedTable"
-                id="table_details"
-              >
-                <thead class="table-dark">
-                  <th></th>
-                  <th>Name</th>
-                </thead>
-                <tbody>
-                  {% if header %} {% for head in header %}
-                  <tr>
-                    {% csrf_token %}
-                    <td>
-                      <input
-                        class="form-check-input header"
-                        type="checkbox"
-                        name="drop_header"
-                        value="{{head}}"
-                      />
-                    </td>
-                    <td id="headers">{{ head }}</td>
-                  </tr>
-                  {% endfor %} {% endif %}
-                </tbody>
-              </table>
+        
+        
+
+        <!-- endModal -->
+        <form action="{% url 'checker_page' %}" method="post">
+          <div class="container mt-4">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped selectedTable" id="table_details">
+                  <thead class="table-dark">
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if header %}
+                    {% for head in header %}
+                    <tr>
+                      <td>
+                        {% csrf_token %}
+                        <input class="form-check-input header" type="checkbox" name="drop_header" value="{{head}}" />
+                      </td>
+                      <td id="headers">{{ head }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <p class="noted">
-            *) Before choose method for processing data please choose feature
-            data <br />
-            (except output/class data)
-          </p>
-          <!-- radios -->
-          {% csrf_token %}
-          <div class="radio">
-            <div class="form-check form-check-inline">
-              <label
-                ><input
-                  class="form-check-input"
-                  type="radio"
-                  name="selected_method"
-                  value="2"
-                />Clustering</label
-              >
+            <p class="noted">
+              *) Sebelum memilih metode pemrosesan data, pilih fitur data <br /> (kecuali data output/kelas)
+            </p>
+            <div class="row mt-4" style="margin-bottom:70px;">
+              <div class="col-md-12">
+                {% csrf_token %}
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="selected_method" id="clusteringRadio" value="2" />
+                  <label class="form-check-label" for="clusteringRadio">Clustering</label>
+                </div>
+                <button type="submit" class="btn btn-dark select" id="select">Select</button>
+              </div>
             </div>
+            
           </div>
-          <!-- end radios -->
-          <button
-            type="submit"
-            class="btn btn-dark select"
-            id="select"
-            onclick="this.form.submit()"
-          >
-            Select
-          </button>
         </form>
       </div>
-      
-      <div class="chart col-md-6">
-        <canvas id="myChart" width="100px" height="53px"></canvas>
-      </div>
     </div>
-    
   </div>
+  <footer class="footer fixed-bottom bg-dark text-light pt-2 text-center">
+    <div class="container">
+        <p>&copy; Copyright 2023 All Rights Reserved</p>
+    </div>
+</footer>
 </main>
 {% endblock %}
