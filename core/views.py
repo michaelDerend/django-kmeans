@@ -47,7 +47,7 @@ def preprocessing(request):
                 means.append(0)
 
         zipped_data = zip(header, types, maxs, mins, means)
-        print("check if :", check[0])
+        # print("check if :", check[0])
         datas = df.values.tolist()
         data = {
             "header": header,
@@ -75,16 +75,16 @@ def preprocessing(request):
             "error": error_message,
             "checking": check[1]
         }
-        print("check else :", check[1])
+        # print("check else :", check[1])
     return render(request, 'index.html', data)
 
 
 def checker_page(request):
     if request.POST:
         drop_header = request.POST.getlist('drop_header')
-        print("drop header :", drop_header)
-        for head in drop_header:
-            print('head : ', head)
+        # print("drop header :", drop_header)
+        # for head in drop_header:
+        #     print('head : ', head)
         request.session['drop'] = drop_header
         method = request.POST.get('selected_method')
         if len(drop_header) >= 2:  # Jika 'drop' bukan array kosong
@@ -177,13 +177,21 @@ def clustering(request):
 
         for cluster_id in range(nilai_k):
             for feature_x, feature_y in feature_combinations:
-
+                # Menentukan lebar plot responsif
+                responsive_width = 768
                 cluster_data = df[df['cluster'] == cluster_id]
                 fig = px.scatter(cluster_data, x=feature_x, y=feature_y,
                                  title=f'Cluster {cluster_id}, Attributes: {feature_x} and {feature_y}')
                 fig.update_xaxes(tickangle=45, tickfont=dict(
                     family='Arial', size=12))
                 fig.update_yaxes(tickfont=dict(family='Arial', size=12))
+                if responsive_width < 400:  # Misalnya, jika lebar kurang dari 400 piksel, font diperkecil
+                    title_font_size = 14
+                else:
+                    title_font_size = 18
+
+                fig.update_layout(title_text=f'Cluster {cluster_id}, Attributes: {feature_x} and {feature_y}', title_font=dict(
+                    size=title_font_size))
 
                 img_graph = fig.to_html()
 
