@@ -12,16 +12,20 @@
         <p>Select Method Clustering</p>
     </div>
     <div class="method col-md-9 " >
-        <div class="btn-group ">
-            <select class="d-md-none d-lg-none  form-select form-control" style="width: 25%;"   id="inputMethod">
+        <div class=" d-md-none d-lg-none ">
+            <select class=" form-select form-control" style="width: 75%;"   id="inputMethod">
                 <option value="1">K-Means</option>
             </select>
-            <select class="d-none d-md-block d-lg-block form-select form-control"  id="inputMethod">
-                <option value="1">K-Means</option>
-            </select>
+            
         </div>
+        <div  class="btn-group d-none d-md-block d-lg-block" >
+          <select class=" form-select form-control"  id="inputMethod">
+            <option value="1">K-Means</option>
+        </select>
+        </div>
+        
         <form action="{% url 'clustering' %}" method="POST">
-            <button class="btn btn-dark start me-2 me-md-5 me-lg-5" type="button" id="cluster_btn" onclick="this.form.submit()">Start</button>
+            <button class="btn btn-dark start me-2 me-md-5 me-lg-5 " style="z-index: 10;" type="button" id="cluster_btn" onclick="this.form.submit()">Start</button>
         
     </div>
 </div>
