@@ -2,24 +2,35 @@
 
 {% block content %}
 <main>
-  <div class="container "style="margin-top:80px">
-    <div class="row">
-      <div class="uploaded col-md-12">
-        <form method="POST" enctype="multipart/form-data">
-          <div class="input-group mb-3">
-            {% csrf_token %}
-            <input
-              type="file"
-              class="form-control"
-              name="document"
-              id="nameFile"
-            />
-            <button class="btn btn-dark ms-2" type="submit" id="file">Apply</button>
-          </div>
-        </form>
+  <div class="container "style="margin-top:100px">
+    <div class="container" >
+      {% if error %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-    </div>
-
+      {% endif %}
+  
+      <div class="row" >
+          <div class="col-md-12 mt-lg-3 mt-md-3">
+              <form method="POST" enctype="multipart/form-data">
+                  <div class="input-group mb-3">
+                      {% csrf_token %}
+                      <input
+                          type="file"
+                          class="form-control"
+                          name="document"
+                          id="nameFile"
+                      />
+                      <button class="btn btn-dark ms-2" type="submit" id="file">Apply</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+  
+{% comment %} ini content {% endcomment %}
+{% if checking == 200 %}
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="border rounded mt-4 p-3" style="overflow: hidden; border-width: 2px;">
@@ -27,6 +38,7 @@
           <p class="d-inline-block me-4 mb-2 mb-md-0">File Name : {{ name }}</p>
           <p class="d-inline-block me-4 d-block mb-2 mb-md-0">Attributes : {{ attributes }}</p>
           <p class="d-inline-block mb-2 mb-md-0">Row Data : {{ rows }}</p>
+        
         </div>
       </div>
       <div class="col-md-6 chart">
@@ -151,6 +163,24 @@
       </div>
     </div>
   </div>
+  {% endif %}
+
+  {% if checking == 404 %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 mb-4">
+        <div class="border rounded mt-4 p-3" style="overflow: hidden; border-width: 2px;">
+          <p class="fw-bold">K-means Algorithm Information</p>
+          <p class="d-inline-block me-4 mb-2 mb-md-0">Supported File : CSV</p>
+          <p class="d-inline-block me-4 d-block mb-2 mb-md-0">Data Results : Table cluster</p>
+          <p class="d-inline-block mb-2 mb-md-0">Graphic Results: Plotly 2D, Plotly 3D, Graph of each cluster </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% endif %}
+{% comment %} end content {% endcomment %}
   <footer class="footer fixed-bottom bg-light text-dark pt-2 text-center">
     <div class="container">
         <p>&copy; Copyright 2023 All Rights Reserved</p>

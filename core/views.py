@@ -14,6 +14,8 @@ matplotlib.use('Agg')
 # Create your views here.
 def preprocessing(request):
     # request.session.clear()
+    check = [200, 404]
+    error_message = request.session.pop('error_message', None)
     if bool(request.FILES.get('document', False)) == True:
         uploaded_file = request.FILES['document']
         name = uploaded_file.name
@@ -45,7 +47,7 @@ def preprocessing(request):
                 means.append(0)
 
         zipped_data = zip(header, types, maxs, mins, means)
-        print(maxs)
+        print("check if :", check[0])
         datas = df.values.tolist()
         data = {
             "header": header,
@@ -59,8 +61,10 @@ def preprocessing(request):
             "maxs": maxs,
             "mins": mins,
             "means": means,
+            "checking": check[0]
         }
     else:
+
         name = 'None'
         attributes = 'None'
         rows = 'None'
@@ -68,22 +72,31 @@ def preprocessing(request):
             "name": name,
             "attributes": attributes,
             "rows": rows,
+            "error": error_message,
+            "checking": check[1]
         }
+        print("check else :", check[1])
     return render(request, 'index.html', data)
 
 
 def checker_page(request):
     if request.POST:
         drop_header = request.POST.getlist('drop_header')
-        print(drop_header)
+        print("drop header :", drop_header)
         for head in drop_header:
-            print(head)
+            print('head : ', head)
         request.session['drop'] = drop_header
         method = request.POST.get('selected_method')
-        if method == '2':
-            return redirect('clustering')
+        if len(drop_header) >= 2:  # Jika 'drop' bukan array kosong
+            if method == '2':
+                return redirect('clustering')
+            else:
+                return redirect('preprocessing')
         else:
+
+            request.session['error_message'] = "Sorry, Please Select an Attribute First"
             return redirect('preprocessing')
+
     else:
         return render(request, 'index.html')
 
