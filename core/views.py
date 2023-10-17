@@ -14,6 +14,7 @@ matplotlib.use('Agg')
 # Create your views here.
 def preprocessing(request):
     # request.session.clear()
+
     check = [200, 404]
     error_message = request.session.pop('error_message', None)
     if bool(request.FILES.get('document', False)) == True:
