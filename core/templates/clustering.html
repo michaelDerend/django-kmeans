@@ -98,7 +98,7 @@
                     {% for cluster in clusters %}
                       <p>Cluster {{forloop.counter0}}: {{ cluster }}</p>
                     {% endfor %}
-                    <canvas id="chart" class="border border-secondary" width="150px" height="50px"></canvas>
+                    <canvas id="chart" class="" width="150px" height="50px"></canvas>
                     {% if chart %}
                       {{ chart|safe }}
                       <div class="cluster-combinations">
