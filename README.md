@@ -1,6 +1,6 @@
 # K-MEANS Algorithm
 
-Web application to cluster data only use csv file upload on django technology.
+Web aplikasi untuk mengcluster / mengelompokan data secara dinamis dari file csv.
 
 [![Django CI](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml/badge.svg)](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml) [![license](https://img.shields.io/github/license/dkzhen/django-kmeans.svg)](https://github.com/dkzhen/django-kmeans/blob/main/LICENSE) [![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=blue)](https://www.python.org) ![contributor](https://img.shields.io/github/contributors/dkzhen/django-kmeans?color=purple) ![size](https://img.shields.io/github/repo-size/dkzhen/django-kmeans?color=orange) [![GitHub last commit](https://img.shields.io/github/last-commit/dkzhen/django-kmeans.svg?style=flat)]() [![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/t/dkzhen/django-kmeans)]() [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/) [![GitHub forks](https://img.shields.io/github/forks/dkzhen/django-kmeans?color=tomato)]() ![PyPI - Status](https://img.shields.io/pypi/status/plotly) ![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/dkzhen/django-kmeans)
 
