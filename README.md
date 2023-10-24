@@ -2,7 +2,7 @@
 
 Web application to cluster data only use csv file upload on django technology.
 
-[![Django CI](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml/badge.svg)](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml) [![license](https://img.shields.io/github/license/dkzhen/django-kmeans.svg)]() [![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=yellow)](https://www.python.org) ![contributor](https://img.shields.io/github/contributors/dkzhen/django-kmeans?color=blue)
+[![Django CI](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml/badge.svg)](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml) [![license](https://img.shields.io/github/license/dkzhen/django-kmeans.svg)]() [![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=blue)](https://www.python.org) ![contributor](https://img.shields.io/github/contributors/dkzhen/django-kmeans?color=purple) ![size](https://img.shields.io/github/repo-size/dkzhen/django-kmeans?color=orange)
 
 ## Usage
 
