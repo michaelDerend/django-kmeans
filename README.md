@@ -2,7 +2,7 @@
 
 Web application to cluster data only use csv file upload on django technology.
 
-[![Django CI](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml/badge.svg)](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml) [![license](https://img.shields.io/github/license/dkzhen/django-kmeans.svg)](https://github.com/dkzhen/django-kmeans/blob/main/LICENSE) [![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=blue)](https://www.python.org) ![contributor](https://img.shields.io/github/contributors/dkzhen/django-kmeans?color=purple) ![size](https://img.shields.io/github/repo-size/dkzhen/django-kmeans?color=orange) [![GitHub last commit](https://img.shields.io/github/last-commit/dkzhen/django-kmeans.svg?style=flat)]() [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/dkzhen/django-kmeans.svg?style=flat)]() [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
+[![Django CI](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml/badge.svg)](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml) [![license](https://img.shields.io/github/license/dkzhen/django-kmeans.svg)](https://github.com/dkzhen/django-kmeans/blob/main/LICENSE) [![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=blue)](https://www.python.org) ![contributor](https://img.shields.io/github/contributors/dkzhen/django-kmeans?color=purple) ![size](https://img.shields.io/github/repo-size/dkzhen/django-kmeans?color=orange) [![GitHub last commit](https://img.shields.io/github/last-commit/dkzhen/django-kmeans.svg?style=flat)]() [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/dkzhen/django-kmeans.svg?style=flat)]() [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/) [![GitHub forks](https://img.shields.io/github/forks/dkzhen/django-kmeans.svg?style=social&label=Fork)](https://github.com/JonSnow/MyBadges)
 
 ## Technology
 
@@ -79,8 +79,6 @@ $ bundle dependencies versions
 ## Team
 
 [![GitHub followers](https://img.shields.io/github/followers/dkzhen.svg?style=social&label=dkzhen)](https://github.com/dkzhen) [![GitHub followers](https://img.shields.io/github/followers/arthur-son.svg?style=social&label=arthur-son)](https://github.com/arthur-son)
-
-- Putra
 
 ## Version
 
