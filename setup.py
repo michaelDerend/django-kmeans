@@ -5,7 +5,7 @@ import string
 import sys
 
 
-def generate_secret_key():
+def generate_random_string():
     characters = string.ascii_letters + string.digits + string.punctuation
     random_string = ''.join(random.choice(characters) for _ in range(50))
     return random_string
@@ -16,7 +16,7 @@ def running_command(command):
 
 
 def installing_all_libraries():
-    running_command(["pip", "install", "-r", "lib.txt"])
+    running_command(["pip", "install", "-r", "installed_packages.txt"])
 
 
 def installing_specific_library(library_name):
@@ -32,7 +32,7 @@ def running_server():
 
 
 def running_installing():
-    with open('lib.txt', 'r') as file:
+    with open('installed_packages.txt', 'r') as file:
         required_libraries = [line.strip() for line in file]
 
     installed_libraries = subprocess.check_output(
@@ -46,15 +46,20 @@ def running_installing():
         installing_all_libraries()
         migrate()
     else:
-        print("Installing specific libraries... Please Wait")
+        print("Installing libraries... Please Wait")
         for lib in not_installed:
             installing_specific_library(lib)
         migrate()
 
 
-if 'secret-key' in sys.argv:
-    print("\nYour Secret Key: '{key}'\n".format(key=generate_secret_key()))
-elif '-dev' in sys.argv:
+if 'key' in sys.argv:
+    print("\nYour key: '{key}'\n".format(key=generate_random_string()))
+elif '-s' in sys.argv:
     running_command(["py", "manage.py", "runserver"])
+elif '-t' in sys.argv and '--r' in sys.argv:
+    running_command(["py", "manage.py", "tailwind", "start"])
+elif '-t' in sys.argv and '--i' in sys.argv:
+    print('Installing tailwind... Please Wait')
+    running_command(["py", "manage.py", "tailwind", "install"])
 else:
     running_installing()
