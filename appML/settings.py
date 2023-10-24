@@ -25,8 +25,9 @@ SECRET_KEY = '*rs52c&@e9xm$%@a=(3mcvg^)&o=(lk+-52h70qaup+89d#m)!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'zhen.biz.id', '185.255.95.58'
-                 'www.zhen.biz.id', '.zhen.biz.id', 'django.biz.id']
+
+ALLOWED_HOSTS = ['localhost', 'zhen.biz.id', '185.255.95.58'
+                 'www.zhen.biz.id', '.zhen.biz.id', 'django.biz.id', '.vercel.app']
 
 
 # Application definition
