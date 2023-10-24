@@ -16,7 +16,7 @@ def running_command(command):
 
 
 def installing_all_libraries():
-    running_command(["pip", "install", "-r", "requirements.txt"])
+    running_command(["pip", "install", "-r", "lib.txt"])
 
 
 def installing_specific_library(library_name):
@@ -32,7 +32,7 @@ def running_server():
 
 
 def running_installing():
-    with open('requirements.txt', 'r') as file:
+    with open('lib.txt', 'r') as file:
         required_libraries = [line.strip() for line in file]
 
     installed_libraries = subprocess.check_output(
@@ -46,7 +46,7 @@ def running_installing():
         installing_all_libraries()
         migrate()
     else:
-        print("Installing libraries... Please Wait")
+        print("Installing specific libraries... Please Wait")
         for lib in not_installed:
             installing_specific_library(lib)
         migrate()
