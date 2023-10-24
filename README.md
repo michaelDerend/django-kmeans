@@ -33,7 +33,7 @@ Web application to cluster data only use csv file upload on django technology.
 OR
 
 ```console
-https://github.com/dkzhen/django-kmeans/releases
+https://github.com/dkzhen/django-kmeans/releases/latest
 ```
 
 2. install dependencies
@@ -80,3 +80,7 @@ $ bundle dependencies versions
 
 - Dani
 - Putra
+
+## Version
+
+[![GitHub Release](https://img.shields.io/github/v/release/dkzhen/django-kmeans.svg)](https://github.com/dkzhen/django-kmeans/releases/latest)
