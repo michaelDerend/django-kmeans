@@ -1,6 +1,6 @@
-# K-MEANS use Django
+# K-MEANS Algorithm
 
-Web application to cluster data only use csv file upload.
+Web application to cluster data only use csv file upload on django technology.
 
 [![Django CI](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml/badge.svg)](https://github.com/dkzhen/django-kmeans/actions/workflows/django.yml) [![license](https://img.shields.io/github/license/dkzhen/django-kmeans.svg)]()
 
