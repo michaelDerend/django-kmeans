@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+import subprocess
 import os
 import sys
 from dotenv import load_dotenv
@@ -137,3 +138,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Tambahkan path ke direktori proyek ke sys.path
 sys.path.append(BASE_DIR)
+# Auto-install libraries using setup.py
+
+
+def install_libraries():
+    try:
+        subprocess.call(['python', 'setup.py'])
+    except Exception as e:
+        print(f"Error during library installation: {str(e)}")
+
+
+# Jalankan fungsi install_libraries() saat proyek Django dimulai
+install_libraries()
