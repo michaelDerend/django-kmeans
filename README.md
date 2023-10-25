@@ -15,7 +15,7 @@ Web aplikasi untuk mengcluster / mengelompokan data secara dinamis dari file csv
 3. input number of clusters
 4. click start and system automatically create clusters results
 
-## Installation
+## Installation | cara install
 
 > [!IMPORTANT]
 > Please install required libraries.
@@ -24,17 +24,20 @@ Web aplikasi untuk mengcluster / mengelompokan data secara dinamis dari file csv
 
 - [Python 3.9.0 or latest](https://www.python.org/downloads/)
 
-1. Clone repository
+1. Clone repo github ini
 
 ```console
   git clone https://github.com/dkzhen/django-kmeans
 ```
 
-OR
+atau bisa download bundle projectnya pastikan download yang terbaru / latest
 
 ```console
 https://github.com/dkzhen/django-kmeans/releases/latest
 ```
+
+- setelah di download projectnya diektrak terlebih dahulu rar/zip
+- buka folder di vscode
 
 2. install dependencies
 
