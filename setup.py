@@ -55,7 +55,7 @@ def logo():
 def creditInstall():
     print("+--------------------------------------------+")
     print("|  "+'\u001b[33m'"Congratulation!!" +
-          '\u001b[0m'" All library terinstall   |")
+          '\u001b[0m'" All library installed    |")
     print("|  Silahkan Jalankan " +
           '\u001b[31m'"'python setup.py -dev'"+'\u001b[0m'"  |")
     print("|                                            |")
@@ -139,7 +139,8 @@ def install_libraries():
         for library in required_libraries:
             try:
                 subprocess.check_call(['pip', 'install', library])
-                print(f'Library {library} telah diinstal.')
+                print('\u001b[33m' +
+                      'Library '+library+' telah diinstal.'+'\u001b[0m')
             except subprocess.CalledProcessError as e:
                 print(f'Error installing {library}: {e}')
         migrate()
@@ -154,7 +155,8 @@ def install_libraries():
 
 
 if 'secret-key' in sys.argv:
-    print('+------------------------------------------------------------------------+')
+    print(
+        '\u001b[33;1m'+'+------------------------------------------------------------------------+')
     print("|  "+'\u001b[36;1m'"Your Secret key:"+'\u001b[0m'+'\u001b[33;1m'+" '{key}' |".format(
         key=generate_random_string()))
     print(
