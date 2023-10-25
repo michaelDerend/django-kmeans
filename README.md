@@ -38,6 +38,7 @@ https://github.com/dkzhen/django-kmeans/releases/latest
 
 - setelah di download projectnya diektrak terlebih dahulu rar/zip
 - buka folder di vscode
+  ![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/dir.jpg)
 
 2. install dependencies
 
