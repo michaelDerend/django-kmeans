@@ -75,6 +75,28 @@ Note : Jika sudah terinstall maka akan muncul prompt seperti dibawah
 
 ![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/venv.jpg)
 
+- masuk ke dalam mode venv
+
+```python
+  venv\Scripts\activate
+```
+
+Note : untuk keluar dari mode venv cukup ketikkan 'deactivate'
+
+- pastikan anda sudah dalam venv ada label (venv) dikiri
+
+![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/labelvenv.jpg)
+
+- ketikkan kode dibawah , maka secara otomatis library akan terinstall
+
+```python
+  python setup.py
+```
+
+- jika berhasil maka akan muncul prompt seperti dibawah
+
+![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/instal.jpg)
+
 3. run your application
 
 ```python
