@@ -37,7 +37,7 @@ https://github.com/dkzhen/django-kmeans/releases/latest
 ```
 
 - setelah di download projectnya diektrak terlebih dahulu rar/zip
-- buka folder di vscode
+- buka folder project tadi di vscode
 
 ![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/dir.jpg)
 
@@ -59,7 +59,7 @@ Note: Salin kode random tersebut , cari file env.example diproject
 
 ![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/env.jpg)
 
-2. install dependencies || install librari python
+2. install dependencies || install perpustakaan python
 
 - Jalankan
 
