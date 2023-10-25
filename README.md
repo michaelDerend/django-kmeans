@@ -41,10 +41,30 @@ https://github.com/dkzhen/django-kmeans/releases/latest
 
 ![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/dir.jpg)
 
-2. install dependencies
+2. Setting environment || membuat env
+
+- buka terminal di vscode ( powershell / cmd / gitbash)
+- ketikkan perintah dibawah
 
 ```python
-  pip install -r requirements.txt
+  python setup.py secret-key
+```
+
+![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/secretkey.jpg)
+
+Note: Salin kode random tersebut , cari file env.example diproject
+
+- rename env.example menjadi .env
+- pastekan kode random diatas di SECRET_KEY = paste disini!
+
+![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/env.jpg)
+
+2. install dependencies || install librari python
+
+- Jalankan
+
+```python
+  py setup.py secret-key
 ```
 
 3. run your application
