@@ -124,7 +124,7 @@ Note : untuk keluar dari mode venv cukup ketikkan 'deactivate'
 ```
 
 > [!IMPORTANT]
-> Pastikan aplikasi didalam virtual environment (venv)
+> Pastikan aplikasi dijalankan didalam virtual environment (venv)
 
 ## List dependency versions
 
