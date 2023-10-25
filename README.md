@@ -23,6 +23,8 @@ Web aplikasi untuk mengcluster / mengelompokan data secara dinamis dari file csv
 ### required
 
 - [Python 3.9.0 or latest](https://www.python.org/downloads/)
+- Minimum RAM 1 GB dan Storage Space 1GB
+- Memiliki Internet
 
 1. Clone repo github ini
 
@@ -120,6 +122,9 @@ Note : untuk keluar dari mode venv cukup ketikkan 'deactivate'
 ```python
   python manage.py runserver
 ```
+
+> [!IMPORTANT]
+> Pastikan aplikasi didalam virtual environment (venv)
 
 ## List dependency versions
 
