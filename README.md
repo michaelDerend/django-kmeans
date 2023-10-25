@@ -61,11 +61,19 @@ Note: Salin kode random tersebut , cari file env.example diproject
 
 2. install dependencies || install perpustakaan python
 
-- Jalankan
+- buat virtual env , ketikan perintah dibawah
 
 ```python
-  py setup.py secret-key
+  python setup.py
 ```
+
+Note : jika belum pernah membuat maka akan diinstal otomatis
+
+![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/novenv.jpg)
+
+Note : Jika sudah terinstall maka akan muncul prompt seperti dibawah
+
+![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/venv.jpg)
 
 3. run your application
 
