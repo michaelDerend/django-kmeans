@@ -8,12 +8,16 @@ Web aplikasi untuk mengcluster / mengelompokan data secara dinamis dari file csv
 
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white) ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white) ![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white) ![Plotly](https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white) ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white) ![Gunicorn](https://img.shields.io/badge/gunicorn-%298729.svg?style=for-the-badge&logo=gunicorn&logoColor=white)
 
-## Usage
+## Usage | cara menggunakan
 
-1. upload your file csv and apply
-2. select clustering
-3. input number of clusters
-4. click start and system automatically create clusters results
+![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/tampilanapp.jpg)
+
+1. upload file csv nya dan klik apply
+2. pilih atribut lebih dari 1 / minimum 2
+3. lalu pilih radio button clustering dan klik select
+4. masukan jumlah nilai K / jumlah cluster
+5. sistem akan menampilkan hasilnya secara otomatis
+6. hasil berupa visualisasi data dan cluster
 
 ## Installation | cara install
 
