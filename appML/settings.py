@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import sys
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -133,3 +134,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Tambahkan path ke direktori proyek ke sys.path
+sys.path.append(BASE_DIR)
