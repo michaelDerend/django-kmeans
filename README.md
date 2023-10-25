@@ -59,7 +59,7 @@ Note: Salin kode random tersebut , cari file env.example diproject
 
 ![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/env.jpg)
 
-2. install dependencies || install perpustakaan python
+3. install dependencies || install perpustakaan python
 
 - buat virtual env , ketikan perintah dibawah
 
@@ -97,10 +97,20 @@ Note : untuk keluar dari mode venv cukup ketikkan 'deactivate'
 
 ![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/instal.jpg)
 
-3. run your application
+4. run your application | jalankan aplikasi
+
+- jalankan aplikasi dengan perintah berikut
 
 ```python
-  python manage.py  runserver
+  python setup.py -dev
+```
+
+![image.png](https://github.com/dkzhen/django-kmeans/blob/main/utils/images/run.jpg)
+
+- buka browser kunjungi alamat dibawah
+
+```python
+  http://127.0.0.1:8000
 ```
 
 ## List dependency versions
