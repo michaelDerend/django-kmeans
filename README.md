@@ -113,6 +113,14 @@ Note : untuk keluar dari mode venv cukup ketikkan 'deactivate'
   http://127.0.0.1:8000
 ```
 
+- jika ingin berhenti / stop ' CTRL + C '
+
+- Jika ingin mengedit kode dan menggunakan command bawaan bisa menggunakan perintah dibawah
+
+```python
+  python manage.py runserver
+```
+
 ## List dependency versions
 
 ```console
