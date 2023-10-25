@@ -78,7 +78,7 @@ $ bundle dependencies versions
 
 ## Team
 
-[![GitHub followers](https://img.shields.io/github/followers/dkzhen.svg?style=social&label=dkzhen)](https://github.com/dkzhen) [![GitHub followers](https://img.shields.io/github/followers/arthur-son.svg?style=social&label=arthur-son)](https://github.com/arthur-son)
+[![GitHub followers](https://img.shields.io/github/followers/dkzhen.svg?style=social&label=dkzhen)](https://github.com/dkzhen) [![GitHub followers](https://img.shields.io/github/followers/arthur-son.svg?style=social&label=arthur-son)](https://github.com/arthur-son) [![GitHub followers](https://img.shields.io/github/followers/michaelDerend.svg?style=social&label=michaelDerend)](https://github.com/michaelDerend)
 
 ## Version
 
